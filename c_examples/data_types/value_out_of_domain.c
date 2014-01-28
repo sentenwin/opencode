@@ -21,7 +21,11 @@
 #include<stdio.h>
 int main()
 {
+#ifdef test
         short int fact=1;
+#else
+        long long unsigned int fact=1;
+#endif
         int count,num;
         printf("Enter a number:");
         scanf("%d",&num);
@@ -29,17 +33,34 @@ int main()
         {
                 fact = fact * count;
         }
+#ifdef test
         printf("factorial of %d is :%d \n",num,fact);
+#else
+        printf("factorial of %d is :%llu \n",num,fact);
+#endif
         return 0;
 }
 
 /************ output *****************/
-/* Case 1
+/* Run using this command
+ * $> gcc value_out_of_domain.c -Dtest -o value_out_of_domain
+ * Case 1
  * Enter a number:30
  * factorial of 30 is :0 
  *
  * Case 2 
  * Enter a number:13
  * factorial of 13 is :-13312 
+ *
+ * Correct output
+ *
+ * Run using this command
+ * $> gcc value_out_of_domain.c -o value_out_of_domain
+ * $> ./value_out_of_domain 
+ * Enter a number:30
+ * factorial of 30 is :9682165104862298112 
+ * $> ./value_out_of_domain 
+ * Enter a number:13
+ * factorial of 13 is :6227020800 
  *
  */
